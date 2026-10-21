@@ -145,6 +145,10 @@ MAILERS = {
     },
 }
 
+# Redirecionamento da autenticação
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
 # Dados de ProjectUs
 
 SITENAME = 'ProjectUs'
