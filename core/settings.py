@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'projectus'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,11 +140,7 @@ STATIC_URL = 'static/'
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+
 
 # Redirecionamento da autenticação
 LOGIN_REDIRECT_URL = '/'
@@ -152,3 +149,20 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 # Dados de ProjectUs
 
 SITENAME = 'ProjectUs'
+
+#ENVIO DE E-MAILS
+
+MAILERS = {
+    'default': {
+        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
+        'OPTIONS': {
+            'host': 'smtp.gmail.com',
+            'port': 587,
+            'username': 'gian.69889868@gmail.com',
+            'password': 'uitr bopc vvtq ioip', # Senha de aplicativo do Gmail
+            'use_tls': True,
+            'use_ssl': False,
+            'timeout': 20,
+        },
+    },
+}
