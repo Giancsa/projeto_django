@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles'
     
+    
 ]
 
 MIDDLEWARE = [
@@ -166,3 +167,12 @@ MAILERS = {
         },
     },
 }
+
+# Redirecionamento da autenticação
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# Dados de ProjectUs
+
+SITENAME = 'ProjectUs'
+SITE_ID = 1
