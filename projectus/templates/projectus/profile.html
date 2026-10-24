@@ -14,18 +14,24 @@
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
             {{ field }}
             {% for error in field.errors %}
-            <div>{{ error }}</div>
-            {% endfor %}
+        <div>{{ error }}</div>
+        {% endfor %}
         </p>
         {% endfor %}
         {% if form.non_field_errors %}
         <p>
             {% for error in form.non_field_errors %}
-            <div>{{ error }}</div>
-            {% endfor %}
+        <div>{{ error }}</div>
+        {% endfor %}
         </p>
         {% endif %}
         <p><button type="submit">Salvar alterações</button></p>
+
+        {% if user.is_authenticated %}
+        <p><a href="{% url 'password_change' %}">
+            Alterar minha senha
+        </a></p>
+        {% endif %}
     </form>
 
 </section>
