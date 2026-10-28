@@ -1,28 +1,83 @@
+
 {% extends 'projectus/_base.html' %}
 
 {% block content %}
 
-<section>
+<section class="container py-4"> <!-- Centraliza o conteúdo e adiciona espaço vertical -->
 
-    <h2>Posts Recentes</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Coloca o título e a contagem nas extremidades, alinhados verticalmente -->
 
-    <p>{{ total }} posts.</p>
+        <h2 class="mb-0">Posts Recentes</h2> <!-- Título da seção, sem margem inferior -->
 
-    {% for post in posts %}
+        <span class="badge text-bg-secondary">
+            {{ total }} posts
+        </span> <!-- Mostra a quantidade de posts em um selo do Bootstrap -->
 
-    <div>
-        <img src="{{ post.thumbnail }}" alt="{{ post.title }}" width="150">
-        <h4><a href="{% url 'post_view' id=post.id  %}">{{ post.title }}</a></h4>
-        <p>{{ post.summary }}</p>
     </div>
-    <hr>
 
-    {% empty %}
+    <div class="row g-4"> <!-- Cria a grade e adiciona espaço entre os cards -->
 
-    <p>Não achei nada.</p>
+        {% for post in posts %} <!-- Percorre os posts enviados pelo Django -->
 
-    {% endfor %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <!-- Um card por linha no celular, dois em telas médias e três em telas grandes -->
 
-</section>
+            <article class="card h-100">
+                <!-- Cria um card e permite que ocupe toda a altura da coluna -->
+
+                <img
+                    src="{{ post.thumbnail }}"
+                    class="card-img-top"
+                    alt="{{ post.title }}"
+                >
+                <!-- Exibe a imagem no topo do card -->
+
+                <div class="card-body d-flex flex-column">
+                    <!-- Cria o corpo do card e organiza o conteúdo verticalmente -->
+
+                    <h5 class="card-title">
+                        <a
+                            href="{% url 'post_view' id=post.id %}"
+                            class="text-decoration-none"
+                        >
+                            {{ post.title }}
+                        </a>
+                    </h5>
+                    <!-- Título clicável que leva à página do post -->
+
+                    <p class="card-text">
+                        {{ post.summary }}
+                    </p>
+                    <!-- Exibe o resumo da publicação -->
+
+                    <a
+                        href="{% url 'post_view' id=post.id %}"
+                        class="btn btn-primary mt-auto align-self-start"
+                    >
+                        Ler publicação
+                    </a>
+                    <!-- Botão de leitura alinhado ao início e empurrado para baixo -->
+
+                </div> <!-- Fecha o corpo do card -->
+
+            </article> <!-- Fecha o card -->
+
+        </div> <!-- Fecha a coluna -->
+
+        {% empty %} <!-- Executa se não houver publicações -->
+
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                Não encontrei publicações.
+            </div>
+            <!-- Exibe um aviso informativo quando a lista estiver vazia -->
+        </div>
+
+        {% endfor %} <!-- Finaliza o loop -->
+
+    </div> <!-- Fecha a grade de cards -->
+
+</section> <!-- Fecha a seção principal -->
 
 {% endblock %}

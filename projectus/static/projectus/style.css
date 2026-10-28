@@ -1,0 +1,97 @@
+
+/* CABEÇALHO PRINCIPAL */
+.site-header {
+    display: flex; /* Coloca logo e navegação lado a lado */
+    align-items: center; /* Alinha os elementos verticalmente */
+    justify-content: space-between; /* Separa a logo dos links */
+    flex-wrap: wrap; /* Permite quebrar a linha em telas pequenas */
+    gap: 16px; /* Cria espaço entre os grupos */
+    padding: 20px 32px; /* Define o espaço interno do cabeçalho */
+    background-color: #001a41; /* Define o fundo azul */
+}
+
+
+/* ORGANIZA O SÍMBOLO E O NOME DA LOGO */
+.site-logo {
+    display: inline-flex; /* Coloca a imagem e o texto lado a lado */
+    align-items: center; /* Alinha ambos verticalmente ao centro */
+    gap: 10px; /* Cria espaço entre o símbolo e o nome */
+    color: #ffffff; /* Mantém o nome branco no cabeçalho azul */
+    text-decoration: none; /* Remove o sublinhado do link */
+}
+
+/* CONTROLA O TAMANHO DA IMAGEM */
+
+.logo-img {
+    width: 150px; /* Define a largura do símbolo */
+    height: 75px; /* Define a altura do símbolo */
+    object-fit: contain; /* Preserva a proporção da imagem */
+    display: block; /* Evita espaços extras abaixo da imagem */
+}
+
+
+/* ESTILIZA O NOME DO SITE */
+.site-logo span {
+    font-size: 28px; /* Define o tamanho do nome */
+    font-weight: bold; /* Destaca o nome em negrito */
+}
+
+/* EFEITO AO PASSAR O MOUSE */
+.site-logo:hover {
+    color: #e7f0ff; /* Clareia o nome ao passar o mouse */
+}
+
+
+/* NAVEGAÇÃO */
+.site-nav {
+    display: flex; /* Organiza os links em uma linha */
+    align-items: center; /* Alinha links e botão verticalmente */
+    flex-wrap: wrap; /* Permite quebrar a linha se faltar espaço */
+    gap: 20px; /* Define a distância entre os links */
+}
+
+/* LINKS DA NAVEGAÇÃO */
+.site-nav a {
+    color: #ffffff; /* Define os links em branco */
+    text-decoration: none; /* Remove o sublinhado */
+    font-weight: 600; /* Dá destaque aos links */
+}
+
+/* EFEITO DOS LINKS */
+.site-nav a:hover {
+    color: #e7f0ff; /* Clareia os links ao passar o mouse */
+}
+
+/* FORMULÁRIO DE SAÍDA */
+.site-nav form {
+    margin: 0; /* Remove a margem externa do formulário */
+}
+
+/* BOTÃO SAIR */
+.site-nav button {
+    padding: 8px 14px; /* Define o espaço interno do botão */
+    color: #0d6efd; /* Deixa o texto azul */
+    background-color: #ffffff; /* Cria o fundo branco */
+    border: none; /* Remove a borda padrão */
+    border-radius: 6px; /* Arredonda os cantos */
+    font-weight: bold; /* Destaca o texto do botão */
+    cursor: pointer; /* Mostra a mãozinha ao passar o mouse */
+}
+
+/* EFEITO DO BOTÃO */
+.site-nav button:hover {
+    background-color: #e7f0ff; /* Clareia o fundo ao passar o mouse */
+}
+
+/* AJUSTES PARA CELULARES */
+@media (max-width: 600px) {
+    .site-header {
+        padding: 16px; /* Reduz o espaçamento nas laterais */
+        align-items: flex-start; /* Alinha os grupos ao início */
+        flex-direction: column; /* Coloca logo e navegação em linhas separadas */
+    }
+
+    .site-nav {
+        gap: 14px; /* Reduz o espaço entre os links */
+    }
+}
