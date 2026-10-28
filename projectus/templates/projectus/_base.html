@@ -80,10 +80,20 @@
             <!-- Área onde cada página filha coloca seu próprio conteúdo -->
         </main>
 
-        <footer>
-            <div>&copy; 2026 {{ site_name }}</div>
-            <!-- Exibe o ano e o nome do site -->
+
+        <footer class="site-footer"> <!-- Define o rodapé principal do site -->
+
+            <p class="footer-copy">
+                &copy; 2026 {{ site_name|default:'ProjectUs' }}.
+                Todos os direitos reservados.
+            </p> <!-- Exibe o copyright e o nome do site -->
+
+            <a href="{% url 'home' %}" class="footer-link">
+                Voltar ao início
+            </a> <!-- Link para retornar à página inicial -->
+
         </footer>
+
 
     </div> <!-- Finaliza o contêiner principal -->
 

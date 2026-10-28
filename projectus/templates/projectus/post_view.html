@@ -1,74 +1,142 @@
+
 {% extends 'projectus/_base.html' %}
 
 {% block content %}
 
-<article>
+<div class="container-fluid py-4"> <!-- Cria espaço vertical e aproveita a largura disponível -->
 
-    <h2>{{ post.title }}</h2>
+    <div class="row g-4"> <!-- Cria a grade Bootstrap com espaçamento entre colunas -->
 
-    <small>Por {{ author_name }} em {{ post.created_at |date:"d/m/Y"}}.</small>
+        <!-- COLUNA PRINCIPAL: ARTIGO E COMENTÁRIOS -->
+        <div class="col-12 col-lg-8"> <!-- Ocupa toda a largura no celular e 8 colunas em telas grandes -->
 
-    <p><img src="{{ post.thumbnail }}" alt="{{ post.title }}"></p>
+            <article class="post-article"> <!-- Agrupa semanticamente o artigo -->
 
-    <div style="padding: 16px 0">
-        {{ post.textbody }}
+                <h2 class="post-title">{{ post.title }}</h2> <!-- Título da publicação -->
+
+                <small class="post-meta">
+                    Por {{ author_name }} em {{ post.created_at|date:"d/m/Y" }}.
+                </small> <!-- Autor e data da publicação -->
+
+                <img
+                    class="post-thumbnail"
+                    src="{{ post.thumbnail }}"
+                    alt="{{ post.title }}"
+                > <!-- Imagem principal do artigo -->
+
+                <div class="post-body">
+                    {{ post.textbody }} <!-- Conteúdo da publicação -->
+                </div>
+
+                <hr> <!-- Separa o artigo da área de comentários -->
+
+                <!-- FORMULÁRIO DE COMENTÁRIO -->
+                <section class="comment-form-section">
+
+                    {% if user.is_authenticated %} <!-- Verifica se o visitante está logado -->
+
+                        <h3>Comente</h3>
+
+                        <form method="POST" class="comment-form">
+                            {% csrf_token %} <!-- Proteção CSRF do Django -->
+
+                            {{ form.as_div }} <!-- Renderiza os campos do formulário -->
+
+                            <button type="submit" class="btn btn-primary mt-3">
+                                Enviar
+                            </button> <!-- Envia o comentário -->
+                        </form>
+
+                    {% else %} <!-- Visitante não autenticado -->
+
+                        <p>
+                            <a href="{% url 'login' %}">
+                                Entre na sua conta para comentar
+                            </a>
+                        </p> <!-- Link para login usando a URL nomeada do Django -->
+
+                    {% endif %}
+
+                </section>
+
+                <hr> <!-- Separa o formulário da lista de comentários -->
+
+                <!-- LISTA DE COMENTÁRIOS -->
+                <section class="comments-section">
+
+                    <h3>Comentários</h3>
+
+                    {% for comment in comments %} <!-- Percorre os comentários existentes -->
+
+                        <div class="comment-item"> <!-- Agrupa cada comentário -->
+
+                            <p class="comment-meta">
+                                <strong>{{ comment.user.username }}</strong>
+
+                                <small>
+                                    {{ comment.created_at|date:"d/m/Y \à\s H:i" }}
+                                </small> <!-- Exibe a data e a hora -->
+                            </p>
+
+                            <p class="comment-text">
+                                {{ comment.comment }} <!-- Texto do comentário -->
+                            </p>
+
+                        </div>
+
+                    {% empty %} <!-- Caso não existam comentários -->
+
+                        <p>Nenhum comentário ainda.</p>
+
+                    {% endfor %}
+
+                </section>
+
+            </article>
+
+        </div>
+
+        <!-- COLUNA LATERAL: OUTROS ARTIGOS -->
+        <aside class="col-12 col-lg-4"> <!-- Ocupa 4 colunas em telas grandes -->
+
+            <div class="related-posts"> <!-- Agrupa a lista de artigos relacionados -->
+
+                <h3 class="related-title">
+                    Outros artigos de {{ author_name }}
+                </h3>
+
+                {% for post in posts %} <!-- Percorre os outros artigos enviados pelo Django -->
+
+                    <div class="related-post-item"> <!-- Bloco individual de artigo relacionado -->
+
+                        <img
+                            src="{{ post.thumbnail }}"
+                            alt="{{ post.title }}"
+                            class="related-thumbnail"
+                        > <!-- Miniatura do artigo -->
+
+                        <h4>
+                            <a href="{% url 'post_view' id=post.id %}">
+                                {{ post.title }}
+                            </a> <!-- Abre a publicação selecionada -->
+                        </h4>
+
+                        <p>{{ post.summary }}</p> <!-- Resumo do artigo -->
+
+                    </div>
+
+                {% empty %} <!-- Caso não existam outros artigos -->
+
+                    <p>Não encontrei outros artigos.</p>
+
+                {% endfor %}
+
+            </div>
+
+        </aside>
+
     </div>
 
-    <hr>
-    <hr>
-
-    {% if user.is_authenticated %}
-    <h3>Comente</h3>
-
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_div }}
-        <button type="submit">Enviar</button>
-    </form>
-    &nbsp;
-    {% else %}
-    <p><a href="/accounts/login/">Logue-se para comentar</a></p>
-    {% endif %}
-
-    <hr>
-    <hr>
-
-    <h3>Comentários</h3>
-
-    {% for comment in comments %}
-    <p>
-        <strong>{{ comment.user.username }}</strong>
-        <small>{{ comment.created_at|date:"d/m/Y \à\s H:i" }}</small>
-    </p>
-    <p>{{ comment.comment }}</p>
-
-    <hr>
-    {% empty %}
-    <p>Nenhum comentário ainda.</p>
-    {% endfor %}
-
-    <hr>
-    
-
-</article>
-
-<aside>
-    <h3>Outros artigos de {{ author_name }}</h3>
-
-    {% for post in posts %}
-
-    <div>
-        <img src="{{ post.thumbnail }}" alt="{{ post.title }}" width="150">
-        <h4><a href="{% url 'post_view' id=post.id  %}">{{ post.title }}</a></h4>
-        <p>{{ post.summary }}</p>
-    </div>
-    <hr>
-
-    {% empty %}
-
-    <p>Não achei nada.</p>
-
-    {% endfor %}
-</aside>
+</div>
 
 {% endblock %}
