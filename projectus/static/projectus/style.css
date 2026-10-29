@@ -1,173 +1,237 @@
 
 /* =====================================================
-   1. CONFIGURAÇÃO GERAL
+   1. CONFIGURAÇÕES GERAIS
    ===================================================== */
 
 * {
-    box-sizing: border-box; /* Inclui padding e borda no tamanho total dos elementos */
+    box-sizing: border-box; /* Inclui padding e bordas no tamanho total */
 }
 
 html {
-    min-height: 100%; /* Permite que o documento ocupe toda a altura disponível */
+    min-height: 100%; /* Permite que a página ocupe toda a altura disponível */
 }
 
 body {
-    font-family: Arial, sans-serif; /* Define a fonte padrão do site */
+    font-family: Arial, sans-serif; /* Define a fonte principal */
     margin: 0; /* Remove a margem padrão do navegador */
-    padding: 0; /* Remove o espaçamento externo padrão */
-    min-height: 100vh; /* Garante pelo menos a altura total da janela */
-    display: flex; /* Ativa o Flexbox no corpo da página */
+    padding: 0; /* Remove o espaçamento padrão */
+    min-height: 100vh; /* Garante pelo menos a altura da janela */
+    display: flex; /* Ativa o Flexbox */
     flex-direction: column; /* Organiza os elementos verticalmente */
-    background-color: #f4f6f8; /* Define um fundo cinza-claro */
+    background-color: #f4f6f8; /* Define o fundo cinza-claro */
     color: #333; /* Define a cor padrão dos textos */
 }
 
+/* =====================================================
+   2. CONTÊINER GERAL DO SITE
+   ===================================================== */
 
-/* CONTÊINER GERAL DO SITE */
 #container {
-    width: calc(100% - 40px); /* Deixa 20px de espaço em cada lateral */
-    max-width: 1600px; /* Impede que o site fique largo demais em monitores grandes */
-    margin: 20px auto; /* Centraliza o site e cria espaço acima e abaixo */
-    flex: 1; /* Permite que o site ocupe a altura disponível */
-    display: flex; /* Organiza os elementos internos com Flexbox */
+    width: calc(100% - 40px); /* Deixa 20px de margem em cada lateral */
+    max-width: 1600px; /* Limita a largura em monitores grandes */
+    margin: 20px auto; /* Centraliza o site e cria espaço vertical */
+    flex: 1; /* Permite que o site ocupe o espaço disponível */
+    display: flex; /* Organiza os elementos internos */
     flex-direction: column; /* Empilha cabeçalho, conteúdo e rodapé */
     min-width: 0; /* Evita estouro horizontal */
     overflow: hidden; /* Mantém o conteúdo dentro dos cantos arredondados */
-    border-radius: 8px; /* Arredonda os cantos externos do site */
+    border-radius: 8px; /* Arredonda os cantos externos */
 }
-
 
 /* CONTEÚDO PRINCIPAL */
+
 main {
-    flex: 1; /* Ocupa o espaço livre e empurra o rodapé para baixo */
-    width: 100%; /* Usa toda a largura disponível */
-    min-width: 0; /* Evita estouro horizontal em telas menores */
+    flex: 1; /* Empurra o rodapé para baixo quando há pouco conteúdo */
+    width: 100%; /* Ocupa toda a largura disponível */
+    min-width: 0; /* Evita estouro horizontal */
 }
 
-
 /* =====================================================
-   2. CABEÇALHO DO PROJECTUS
+   3. CABEÇALHO DO PROJECTUS
    ===================================================== */
 
 .site-header {
-    display: flex; /* Coloca a logo e a navegação lado a lado */
+    display: flex; /* Organiza as áreas do cabeçalho */
+    flex-direction: column; /* Coloca a navegação abaixo da logo */
+    align-items: stretch; /* Faz as linhas ocuparem a largura disponível */
+    gap: 18px; /* Cria espaço entre as duas linhas */
+    padding: 20px 32px; /* Define o espaçamento interno */
+    background-color: #212f50; /* Define o azul-escuro do cabeçalho */
+    color: #ffffff; /* Define o texto padrão como branco */
+}
+
+/* PRIMEIRA LINHA: LOGO E CONTA */
+
+.header-top {
+    display: flex; /* Coloca a logo e a conta lado a lado */
     align-items: center; /* Alinha os elementos verticalmente */
-    justify-content: space-between; /* Separa a logo dos links */
-    flex-wrap: wrap; /* Permite quebrar a linha se faltar espaço */
-    gap: 16px; /* Define a distância entre os grupos */
-    padding: 20px 32px; /* Cria espaço interno vertical e horizontal */
-    background-color: #1d3355; /* Define o fundo azul */
-    color: #ffffff; /* Define a cor padrão do texto como branco */
+    justify-content: space-between; /* Separa logo e conta */
+    flex-wrap: wrap; /* Permite quebra em telas pequenas */
+    gap: 16px; /* Evita que os elementos fiquem grudados */
 }
 
-/* LOGO CLICÁVEL */
+/* LINK DA LOGO */
+
 .site-logo {
-    display: inline-flex; /* Organiza a imagem horizontalmente */
-    align-items: center; /* Centraliza a logo verticalmente */
-    text-decoration: none; /* Remove o sublinhado do link */
-    color: #ffffff; /* Mantém a cor branca caso exista texto */
+    display: inline-flex; /* Permite organizar a imagem */
+    align-items: center; /* Centraliza a imagem verticalmente */
+    text-decoration: none; /* Remove o sublinhado */
+    flex-shrink: 0; /* Evita que a logo seja comprimida */
 }
 
+/* IMAGEM COMPLETA DA LOGO */
 
-/* IMAGEM DA LOGO */
 .logo-img {
-    display: block; /* Remove espaços extras ao redor da imagem */
-    width: 450px; /* Aumenta a largura da logo */
+    display: block; /* Remove espaços extras abaixo da imagem */
+    width: 240px; /* Define a largura da logo */
     max-width: 100%; /* Impede que ultrapasse o espaço disponível */
-    height: auto; /* Mantém a proporção original da imagem */
-    object-fit: contain; /* Evita distorções */
-    flex-shrink: 0; /* Evita que o Flexbox diminua a logo */
+    height: auto; /* Preserva a proporção original */
+    object-fit: contain; /* Evita distorcer a imagem */
 }
-
 
 /* EFEITO DA LOGO */
+
 .site-logo:hover {
     opacity: 0.9; /* Reduz levemente a opacidade ao passar o mouse */
 }
 
-
 /* =====================================================
-   3. NAVEGAÇÃO
+   4. ÁREA DO USUÁRIO
    ===================================================== */
 
-.site-nav {
-    display: flex; /* Coloca os links em uma linha */
-    align-items: center; /* Alinha links e botão verticalmente */
-    flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
-    gap: 20px; /* Define o espaço entre os elementos */
+.header-account {
+    display: flex; /* Organiza usuário e botão lado a lado */
+    align-items: center; /* Alinha os elementos verticalmente */
+    flex-wrap: wrap; /* Permite quebra em telas estreitas */
+    gap: 16px; /* Define a distância entre os elementos */
 }
 
-/* LINKS DA NAVEGAÇÃO */
-.site-nav a {
-    color: #ffffff; /* Define os links em branco */
+/* LINK DO PERFIL */
+
+.header-account a {
+    color: #ffffff; /* Mantém o texto branco */
     text-decoration: none; /* Remove o sublinhado */
-    font-weight: 600; /* Dá destaque aos links */
+    font-weight: 600; /* Destaca o texto */
     transition: color 0.2s ease; /* Suaviza a mudança de cor */
 }
 
-/* EFEITO DOS LINKS */
-.site-nav a:hover {
-    color: #e7f0ff; /* Clareia o texto ao passar o mouse */
+/* EFEITO DO LINK DO PERFIL */
+
+.header-account a:hover {
+    color: #b9d5ff; /* Clareia o texto ao passar o mouse */
 }
 
-/* FORMULÁRIO DO BOTÃO SAIR */
-.site-nav form {
-    display: inline-flex; /* Permite alinhar o formulário com os links */
+/* FORMULÁRIO DE SAÍDA */
+
+.header-account form {
+    display: inline-flex; /* Permite alinhar o formulário */
     align-items: center; /* Centraliza o botão verticalmente */
-    margin: 0; /* Remove a margem padrão do formulário */
+    margin: 0; /* Remove a margem padrão */
 }
 
 /* BOTÃO SAIR */
-.site-nav button {
-    display: inline-flex; /* Facilita o alinhamento do texto */
-    align-items: center; /* Centraliza o texto verticalmente */
-    justify-content: center; /* Centraliza o texto horizontalmente */
-    box-sizing: border-box; /* Inclui bordas e padding no tamanho total */
-    padding: 8px 14px; /* Define o espaço interno do botão */
-    font-family: inherit; /* Usa a mesma fonte do restante do site */
+
+.header-account button {
+    padding: 8px 14px; /* Define o espaço interno */
+    font-family: inherit; /* Usa a fonte do site */
     font-size: 14px; /* Define o tamanho do texto */
-    font-weight: bold; /* Destaca o texto */
-    line-height: 1.2; /* Controla a altura da linha */
-    color: #0d6efd; /* Define o texto azul */
-    background-color: #ffffff; /* Cria o fundo branco */
-    border: none; /* Remove a borda padrão */
+    font-weight: 600; /* Destaca o texto */
+    color: #ffffff; /* Texto branco */
+    background-color: transparent; /* Remove o fundo branco */
+    border: 1px solid rgba(255, 255, 255, 0.65); /* Borda branca discreta */
     border-radius: 6px; /* Arredonda os cantos */
-    cursor: pointer; /* Mostra a mãozinha ao passar o mouse */
-    transition: background-color 0.2s ease; /* Suaviza a mudança de fundo */
+    cursor: pointer; /* Mostra a mãozinha */
+    transition: background-color 0.2s ease, border-color 0.2s ease; /* Suaviza o efeito */
 }
 
 /* EFEITO DO BOTÃO SAIR */
-.site-nav button:hover {
-    background-color: #e7f0ff; /* Clareia o fundo ao passar o mouse */
+
+.header-account button:hover {
+    background-color: rgba(255, 255, 255, 0.12); /* Fundo branco translúcido */
+    border-color: #ffffff; /* Realça a borda */
 }
 
-/* LINK ENTRAR COM APARÊNCIA DE BOTÃO */
-.site-nav a[href*="login"] {
-    display: inline-flex; /* Permite alinhar o texto dentro do link */
-    align-items: center; /* Centraliza o texto verticalmente */
-    justify-content: center; /* Centraliza o texto horizontalmente */
-    box-sizing: border-box; /* Mantém o cálculo de tamanho consistente */
-    padding: 8px 14px; /* Usa o mesmo espaçamento do botão Sair */
-    color: #0d6efd; /* Define o texto azul */
-    background-color: #ffffff; /* Cria o fundo branco */
+/* =====================================================
+   5. NAVEGAÇÃO ABAIXO DA LOGO
+   ===================================================== */
+
+.site-header .site-nav {
+    display: flex; /* Organiza os links horizontalmente */
+    justify-content: flex-start; /* Alinha os links à esquerda */
+    align-items: center; /* Alinha os links verticalmente */
+    flex-wrap: wrap; /* Permite quebra de linha */
+    gap: 12px; /* Define o espaço entre os links */
+    width: 100%; /* Ocupa toda a largura disponível */
+}
+
+/* LINKS COMUNS DA NAVEGAÇÃO */
+
+.site-header .site-nav > a:not(.btn-new-post) {
+    display: inline-flex; /* Facilita o alinhamento do texto */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 8px 12px; /* Define uma área confortável para clicar */
+    color: #ffffff; /* Texto branco */
+    background-color: transparent; /* Sem fundo branco */
+    border: 1px solid transparent; /* Evita mudanças de tamanho no hover */
     border-radius: 6px; /* Arredonda os cantos */
-    font-family: inherit; /* Mantém a fonte do site */
-    font-size: 14px; /* Mantém o tamanho do texto consistente */
-    font-weight: bold; /* Destaca o texto */
-    line-height: 1.2; /* Mantém a altura da linha consistente */
     text-decoration: none; /* Remove o sublinhado */
-    transition: background-color 0.2s ease; /* Suaviza o efeito de hover */
+    font-weight: 600; /* Destaca o texto */
+    transition: background-color 0.2s ease, color 0.2s ease; /* Suaviza o efeito */
+}
+
+/* EFEITO DOS LINKS COMUNS */
+
+.site-header .site-nav > a:not(.btn-new-post):hover {
+    color: #ffffff; /* Mantém o texto branco */
+    background-color: rgba(255, 255, 255, 0.12); /* Fundo translúcido */
+}
+
+/* BOTÃO NOVA PUBLICAÇÃO */
+
+.site-header .btn-new-post {
+    display: inline-flex; /* Permite alinhar o texto */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    padding: 4px 3px; /* Define o espaço interno */
+    color: #ffffff; /* Texto branco */
+    font-weight: 600; /* Destaca o texto */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: background-color 0.2s ease, border-color 0.2s ease; /* Suaviza o efeito */
+}
+
+/* EFEITO DO BOTÃO NOVA PUBLICAÇÃO */
+
+.site-header .btn-new-post:hover {
+    color: #ffffff; /* Mantém o texto branco */
+    background-color: rgba(255, 255, 255, 0.12); /* Fundo translúcido */
+    border-color: #ffffff; /* Realça a borda */
+}
+
+/* LINK ENTRAR */
+
+.site-header .btn-login {
+    display: inline-flex; /* Organiza o conteúdo do link */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    padding: 8px 14px; /* Define o espaço interno */
+    color: #ffffff; /* Texto branco */
+    background-color: transparent; /* Sem fundo branco */
+    border: 1px solid rgba(255, 255, 255, 0.65); /* Borda discreta */
+    border-radius: 6px; /* Arredonda os cantos */
+    font-weight: 600; /* Destaca o texto */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: background-color 0.2s ease; /* Suaviza o efeito */
 }
 
 /* EFEITO DO LINK ENTRAR */
-.site-nav a[href*="login"]:hover {
-    color: #0d6efd; /* Mantém o texto azul */
-    background-color: #e7f0ff; /* Clareia o fundo ao passar o mouse */
+
+.site-header .btn-login:hover {
+    color: #ffffff; /* Mantém o texto branco */
+    background-color: rgba(255, 255, 255, 0.12); /* Fundo translúcido */
 }
 
-
 /* =====================================================
-   4. TÍTULOS
+   6. TÍTULOS
    ===================================================== */
 
 h1,
@@ -176,213 +240,469 @@ h3,
 h4,
 h5,
 h6 {
-    color: #212529; /* Define uma cor escura para os títulos */
+    color: #212529; /* Define títulos em cinza-escuro */
 }
-
 
 /* =====================================================
-   /* RODAPÉ */
-.site-footer {
-    position: relative; /* Serve de referência para posicionar o link */
-    display: flex; /* Ativa o Flexbox */
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    padding: 20px 32px; /* Define o espaço interno */
-    background-color: #1d3355; /* Fundo escuro */
-    color: #ffffff; /* Texto branco */
-}
-
-/* COPYRIGHT CENTRALIZADO */
-.footer-copy {
-    margin: 0; /* Remove a margem do parágrafo */
-    text-align: center; /* Centraliza o texto */
-}
-
-/* LINK À DIREITA */
-.footer-link {
-    position: absolute; /* Retira o link do fluxo do Flexbox */
-    right: 32px; /* Mantém o link afastado da borda direita */
-    color: #ffffff; /* Texto branco */
-    text-decoration: none; /* Remove o sublinhado */
-}
-
-/* EFEITO DO LINK DO RODAPÉ */
-.footer-link:hover {
-    color: #ffc107; /* Muda o link para amarelo ao passar o mouse */
-}
-
-
-/* =====================================================
-   6. RESPONSIVIDADE
+   7. PÁGINA DE PUBLICAÇÃO
    ===================================================== */
 
-
-/* AJUSTES PARA CELULARES */
-@media (max-width: 600px) {
-    #container {
-        width: calc(100% - 20px); /* Deixa 10px de espaço em cada lateral */
-        margin: 10px auto; /* Reduz as margens externas */
-        border-radius: 6px; /* Reduz o arredondamento */
-    }
-}
-
-
-    /* LINKS EM TELAS PEQUENAS */
-    .site-nav {
-        gap: 14px; /* Reduz o espaço entre os links */
-    }
-
-    /* LOGO EM TELAS PEQUENAS */
-    .logo-img {
-    width: 220px; /* Mantém a logo maior em telas pequenas */
-    max-width: 100%; /* Respeita a largura disponível */
-    height: auto; /* Preserva a proporção */
-}
-
-    /* RODAPÉ EM TELAS PEQUENAS */
-    .site-footer {
-        padding: 18px 16px; /* Reduz o espaço interno */
-        flex-direction: column; /* Empilha os elementos */
-        align-items: flex-start; /* Alinha os elementos à esquerda */
-    }
-}
-
-
 /* ARTIGO PRINCIPAL */
+
 .post-article {
-    min-width: 0; /* Evita que conteúdos largos estourem a coluna */
+    min-width: 0; /* Evita que o conteúdo ultrapasse a coluna */
 }
 
 /* TÍTULO DO ARTIGO */
+
 .post-title {
-    margin-bottom: 8px; /* Aproxima o título dos dados do autor */
+    margin-bottom: 8px; /* Aproxima o título dos metadados */
     font-size: 2rem; /* Destaca o título */
-    line-height: 1.25; /* Controla a altura das linhas do título */
-    overflow-wrap: anywhere; /* Evita que palavras longas estourem o layout */
+    line-height: 1.25; /* Controla a altura das linhas */
+    overflow-wrap: anywhere; /* Evita estouro com palavras longas */
 }
 
 /* AUTOR E DATA */
+
 .post-meta {
-    display: block; /* Faz os metadados ocuparem uma linha própria */
+    display: block; /* Coloca os metadados em linha própria */
     margin-bottom: 20px; /* Cria espaço antes da imagem */
-    color: #6c757d; /* Usa cinza para informações secundárias */
+    color: #6c757d; /* Usa cinza para informação secundária */
 }
 
 /* IMAGEM PRINCIPAL */
+
 .post-thumbnail {
-    display: block; /* Remove o alinhamento padrão de imagem em linha */
+    display: block; /* Remove espaço extra abaixo da imagem */
     width: 100%; /* Ocupa a largura da coluna */
     max-height: 460px; /* Limita a altura da imagem */
-    object-fit: cover; /* Preenche a área sem distorcer a imagem */
+    object-fit: cover; /* Preenche a área sem distorcer */
     border-radius: 10px; /* Arredonda os cantos */
-    margin-bottom: 24px; /* Separa a imagem do texto */
+    margin-bottom: 24px; /* Separa imagem e texto */
 }
 
 /* TEXTO DO ARTIGO */
+
 .post-body {
-    font-size: 1.05rem; /* Melhora a leitura do conteúdo */
+    font-size: 1.05rem; /* Define tamanho confortável para leitura */
     line-height: 1.8; /* Aumenta o espaço entre as linhas */
-    overflow-wrap: anywhere; /* Evita estouro com textos longos */
-    white-space: pre-line; /* Preserva quebras de linha do conteúdo */
+    overflow-wrap: anywhere; /* Evita estouro horizontal */
+    white-space: pre-line; /* Preserva quebras de linha */
 }
 
-/* TÍTULOS DAS SEÇÕES */
+/* SEÇÕES DE COMENTÁRIOS */
+
 .comment-form-section,
 .comments-section {
-    margin-top: 24px; /* Separa as seções do conteúdo anterior */
-    margin-bottom: 24px; /* Cria espaço após cada seção */
+    margin-top: 24px; /* Cria espaço acima */
+    margin-bottom: 24px; /* Cria espaço abaixo */
 }
 
-/* FORMULÁRIO DE COMENTÁRIO */
+/* FORMULÁRIO DE COMENTÁRIOS */
+
 .comment-form {
-    display: flex; /* Organiza os campos e o botão */
+    display: flex; /* Organiza os elementos */
     flex-direction: column; /* Coloca os campos verticalmente */
-    gap: 12px; /* Cria espaço entre os elementos do formulário */
+    gap: 12px; /* Define o espaço entre os elementos */
 }
 
-/* COMENTÁRIOS INDIVIDUAIS */
+/* COMENTÁRIO INDIVIDUAL */
+
 .comment-item {
-    padding: 16px; /* Cria espaço interno no comentário */
-    margin-bottom: 14px; /* Separa um comentário do outro */
-    background-color: #ffffff; /* Fundo branco */
-    border: 1px solid #dee2e6; /* Borda cinza discreta */
+    padding: 16px; /* Cria espaço interno */
+    margin-bottom: 14px; /* Separa os comentários */
+    background-color: #ffffff; /* Fundo branco para leitura */
+    border: 1px solid #dee2e6; /* Borda discreta */
     border-radius: 8px; /* Arredonda os cantos */
 }
 
 /* AUTOR E DATA DO COMENTÁRIO */
+
 .comment-meta {
-    display: flex; /* Coloca nome e data na mesma linha quando houver espaço */
-    flex-wrap: wrap; /* Permite quebrar a linha em telas pequenas */
-    align-items: baseline; /* Alinha o texto pela linha de base */
-    gap: 8px; /* Cria espaço entre autor e data */
-    margin-bottom: 8px; /* Separa os metadados do comentário */
-    color: #495057; /* Usa cinza-escuro */
+    display: flex; /* Organiza autor e data */
+    flex-wrap: wrap; /* Permite quebra em telas pequenas */
+    align-items: baseline; /* Alinha pela linha de base do texto */
+    gap: 8px; /* Separa autor e data */
+    margin-bottom: 8px; /* Cria espaço antes do comentário */
+    color: #495057; /* Texto cinza-escuro */
 }
 
 /* TEXTO DO COMENTÁRIO */
+
 .comment-text {
-    margin: 0; /* Remove a margem padrão do parágrafo */
+    margin: 0; /* Remove margem padrão */
     line-height: 1.6; /* Melhora a legibilidade */
-    overflow-wrap: anywhere; /* Evita estouro com textos longos */
+    overflow-wrap: anywhere; /* Evita estouro horizontal */
 }
 
-/* LATERAL DE ARTIGOS RELACIONADOS */
+/* =====================================================
+   8. OUTROS ARTIGOS
+   ===================================================== */
+
+/* ÁREA LATERAL */
+
 .related-posts {
-    padding: 20px; /* Cria espaço interno na lateral */
-    background-color: #ffffff; /* Destaca a lateral com fundo branco */
-    border: 1px solid #dee2e6; /* Adiciona uma borda discreta */
+    padding: 20px; /* Cria espaço interno */
+    background-color: #ffffff; /* Destaca a lateral */
+    border: 1px solid #dee2e6; /* Borda discreta */
     border-radius: 10px; /* Arredonda os cantos */
 }
 
 /* TÍTULO DA LATERAL */
+
 .related-title {
     margin-bottom: 20px; /* Separa o título dos artigos */
-    font-size: 1.25rem; /* Ajusta o tamanho do título */
+    font-size: 1.25rem; /* Define o tamanho do título */
 }
 
-/* CADA ARTIGO RELACIONADO */
+/* ITEM DE ARTIGO RELACIONADO */
+
 .related-post-item {
     padding-bottom: 18px; /* Cria espaço abaixo do artigo */
     margin-bottom: 18px; /* Separa os artigos */
-    border-bottom: 1px solid #dee2e6; /* Separa visualmente os artigos */
+    border-bottom: 1px solid #dee2e6; /* Adiciona separador */
 }
 
-/* REMOVE A BORDA DO ÚLTIMO ARTIGO */
+/* ÚLTIMO ARTIGO */
+
 .related-post-item:last-child {
-    padding-bottom: 0; /* Remove o espaço inferior do último item */
-    margin-bottom: 0; /* Remove a margem inferior do último item */
+    padding-bottom: 0; /* Remove o espaço inferior */
+    margin-bottom: 0; /* Remove a margem inferior */
     border-bottom: none; /* Remove a borda final */
 }
 
-/* MINIATURAS DA LATERAL */
+/* MINIATURA DO ARTIGO */
+
 .related-thumbnail {
-    display: block; /* Evita espaço extra abaixo da imagem */
-    width: 100%; /* Ocupa a largura da lateral */
-    aspect-ratio: 16 / 9; /* Mantém proporção horizontal uniforme */
-    object-fit: cover; /* Preenche a miniatura sem distorcer */
+    display: block; /* Remove espaço extra da imagem */
+    width: 100%; /* Ocupa a largura disponível */
+    aspect-ratio: 16 / 9; /* Define proporção horizontal */
+    object-fit: cover; /* Evita distorção */
     border-radius: 6px; /* Arredonda os cantos */
-    margin-bottom: 10px; /* Separa a imagem do título */
+    margin-bottom: 10px; /* Separa imagem e título */
 }
 
-/* LINKS DOS ARTIGOS RELACIONADOS */
+/* TÍTULO DO ARTIGO RELACIONADO */
+
 .related-post-item h4 {
-    margin-bottom: 8px; /* Aproxima o resumo do título */
-    font-size: 1rem; /* Define um tamanho adequado para o título */
+    margin-bottom: 8px; /* Separa título e resumo */
+    font-size: 1rem; /* Define tamanho adequado */
 }
+
+/* LINK DO ARTIGO RELACIONADO */
 
 .related-post-item h4 a {
-    color: #0d6efd; /* Usa o azul principal do site */
+    color: #0d6efd; /* Azul principal do site */
     text-decoration: none; /* Remove o sublinhado */
 }
 
+/* EFEITO DO LINK */
+
 .related-post-item h4 a:hover {
-    text-decoration: underline; /* Destaca o link ao passar o mouse */
+    text-decoration: underline; /* Sublinha ao passar o mouse */
 }
 
-/* RESUMOS DOS ARTIGOS RELACIONADOS */
+/* RESUMO DO ARTIGO */
+
 .related-post-item p {
-    margin: 0; /* Remove a margem padrão do parágrafo */
-    color: #6c757d; /* Usa cinza para o texto secundário */
-    font-size: 0.9rem; /* Deixa o resumo menor que o título */
+    margin: 0; /* Remove margem padrão */
+    color: #6c757d; /* Texto secundário cinza */
+    font-size: 0.9rem; /* Deixa o resumo menor */
     line-height: 1.5; /* Melhora a leitura */
+}
+
+/* =====================================================
+   9. RODAPÉ
+   ===================================================== */
+
+.site-footer {
+    display: flex; /* Organiza os elementos do rodapé */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    flex-wrap: wrap; /* Permite quebra de linha */
+    gap: 12px; /* Espaço entre os elementos */
+    padding: 20px 32px; /* Define espaço interno */
+    margin-top: 32px; /* Separa o rodapé do conteúdo */
+    background-color: #212f50; /* Mantém o azul-escuro do site */
+    color: #ffffff; /* Texto branco */
+    position: relative; /* Referência para o link, se posicionado */
+}
+
+/* TEXTO DE COPYRIGHT */
+
+.footer-copy {
+    width: 100%; /* Ocupa a largura disponível */
+    margin: 0; /* Remove a margem padrão */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* LINK DO RODAPÉ */
+
+.footer-link {
+    color: #ffffff; /* Texto branco */
+    text-decoration: none; /* Remove o sublinhado */
+    font-weight: 600; /* Destaca o link */
+    transition: color 0.2s ease; /* Suaviza a mudança de cor */
+}
+
+/* EFEITO DO LINK DO RODAPÉ */
+
+.footer-link:hover {
+    color: #b9d5ff; /* Clareia o link ao passar o mouse */
+}
+
+
+/* =====================================================
+   PÁGINA DE LOGIN
+   ===================================================== */
+
+/* ÁREA EXTERNA DO LOGIN */
+.login-page {
+    display: flex; /* Ativa o Flexbox */
+    justify-content: center; /* Centraliza o cartão horizontalmente */
+    align-items: flex-start; /* Alinha o cartão pelo topo */
+    width: 100%; /* Ocupa a largura disponível */
+    padding: 48px 20px; /* Cria espaço ao redor do cartão */
+}
+
+/* CARTÃO PRINCIPAL */
+.login-card {
+    width: 100%; /* Ocupa o espaço disponível até o limite */
+    max-width: 460px; /* Limita a largura do formulário */
+    background-color: #ffffff; /* Fundo branco */
+    border: 1px solid #e0e5ec; /* Borda discreta */
+    border-radius: 14px; /* Arredonda os cantos */
+    overflow: hidden; /* Mantém o conteúdo dentro dos cantos */
+    box-shadow: 0 8px 24px rgba(33, 47, 80, 0.08); /* Sombra suave */
+}
+
+/* CABEÇALHO DO CARTÃO */
+.login-header {
+    padding: 28px 30px; /* Espaçamento interno */
+    background-color: #212f50; /* Azul-escuro do ProjectUs */
+    color: #ffffff; /* Texto branco */
+    text-align: center; /* Centraliza os textos */
+}
+
+/* TÍTULO DO LOGIN */
+.login-header h1 {
+    margin: 0 0 10px; /* Remove margens extras e cria espaço abaixo */
+    color: #ffffff; /* Garante o título branco */
+    font-size: 1.8rem; /* Define o tamanho do título */
+    line-height: 1.3; /* Controla a altura das linhas */
+}
+
+/* TEXTO DE APRESENTAÇÃO */
+.login-header p {
+    margin: 0; /* Remove a margem padrão */
+    color: #e0e8f8; /* Branco levemente azulado */
+    font-size: 0.95rem; /* Define o tamanho do texto */
+    line-height: 1.5; /* Melhora a leitura */
+}
+
+/* CORPO DO CARTÃO */
+.login-body {
+    padding: 30px; /* Cria espaço ao redor do formulário */
+}
+
+/* GRUPO DE CADA CAMPO */
+.login-field {
+    display: flex; /* Ativa o Flexbox */
+    flex-direction: column; /* Coloca rótulo e campo em linhas separadas */
+    gap: 8px; /* Espaço entre rótulo e campo */
+    margin-bottom: 22px; /* Espaço entre os campos */
+}
+
+/* RÓTULOS */
+.login-field label {
+    color: #344054; /* Cinza-escuro */
+    font-size: 0.95rem; /* Tamanho do rótulo */
+    font-weight: 600; /* Destaca o rótulo */
+}
+
+/* CAMPOS DE USUÁRIO E SENHA */
+.login-field input {
+    width: 100%; /* Ocupa toda a largura do cartão */
+    min-width: 0; /* Evita ultrapassar o contêiner */
+    padding: 12px 14px; /* Espaço interno para digitação */
+    color: #212529; /* Cor do texto digitado */
+    background-color: #ffffff; /* Fundo branco */
+    border: 1px solid #ced4da; /* Borda cinza */
+    border-radius: 7px; /* Cantos arredondados */
+    font-family: inherit; /* Usa a fonte do site */
+    font-size: 1rem; /* Tamanho confortável para leitura */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Suaviza o foco */
+}
+
+/* CAMPO SELECIONADO */
+.login-field input:focus {
+    outline: none; /* Remove o contorno padrão */
+    border-color: #0d6efd; /* Destaca a borda em azul */
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15); /* Indica o foco */
+}
+
+/* MENSAGEM DE ERRO DE UM CAMPO */
+.login-field-error {
+    margin: 0; /* Remove margem padrão */
+    color: #dc3545; /* Vermelho para erros */
+    font-size: 0.875rem; /* Texto menor */
+}
+
+/* ERROS GERAIS DO FORMULÁRIO */
+.login-errors {
+    margin-bottom: 20px; /* Espaço abaixo do aviso */
+    padding: 12px 14px; /* Espaço interno */
+    color: #842029; /* Texto vermelho-escuro */
+    background-color: #f8d7da; /* Fundo rosa-claro */
+    border: 1px solid #f5c2c7; /* Borda de alerta */
+    border-radius: 7px; /* Cantos arredondados */
+}
+
+/* REMOVE MARGENS INTERNAS DOS ERROS */
+.login-errors ul {
+    margin: 0; /* Remove a margem da lista */
+    padding-left: 20px; /* Mantém o recuo dos itens */
+}
+
+/* BOTÃO PRINCIPAL */
+.login-submit {
+    display: block; /* Permite controlar largura e espaçamento */
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 12px 16px; /* Define a altura do botão */
+    color: #ffffff; /* Texto branco */
+    background-color: #0d6efd; /* Azul principal */
+    border: 1px solid #0d6efd; /* Borda azul */
+    border-radius: 7px; /* Cantos arredondados */
+    font-family: inherit; /* Usa a fonte do site */
+    font-size: 1rem; /* Tamanho do texto */
+    font-weight: 600; /* Destaca o texto */
+    cursor: pointer; /* Mostra a mãozinha */
+    transition: background-color 0.2s ease, transform 0.2s ease; /* Suaviza o hover */
+}
+
+/* EFEITO DO BOTÃO */
+.login-submit:hover {
+    background-color: #0b5ed7; /* Azul um pouco mais escuro */
+    border-color: #0a58ca; /* Escurece a borda */
+}
+
+/* LINKS AUXILIARES */
+.login-links {
+    margin-top: 24px; /* Espaço depois do botão */
+    text-align: center; /* Centraliza os links */
+    font-size: 0.9rem; /* Tamanho dos textos */
+    line-height: 1.8; /* Espaço entre as linhas */
+}
+
+/* PARÁGRAFO DOS LINKS */
+.login-links p {
+    margin: 12px 0 0; /* Cria espaço acima do cadastro */
+    color: #667085; /* Cinza secundário */
+}
+
+/* LINKS */
+.login-links a {
+    color: #0d6efd; /* Azul principal */
+    font-weight: 600; /* Destaca os links */
+    text-decoration: none; /* Remove o sublinhado */
+}
+
+/* EFEITO DOS LINKS */
+.login-links a:hover {
+    color: #0a58ca; /* Azul mais escuro */
+    text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+/* AJUSTES PARA CELULARES */
+@media (max-width: 480px) {
+    .login-page {
+        padding: 28px 12px; /* Reduz o espaço externo */
+    }
+
+    .login-header {
+        padding: 24px 20px; /* Reduz o espaço do cabeçalho */
+    }
+
+    .login-header h1 {
+        font-size: 1.55rem; /* Reduz o título */
+    }
+
+    .login-body {
+        padding: 24px 20px; /* Reduz o espaço interno */
+    }
+}
+
+
+
+/* ORIENTAÇÕES DOS CAMPOS DE CADASTRO */
+.register-help {
+    margin-top: 2px; /* Cria um pequeno espaço após o campo */
+    color: #667085; /* Usa cinza para informações auxiliares */
+    font-size: 0.82rem; /* Deixa as orientações menores */
+    line-height: 1.5; /* Melhora a leitura das instruções */
+    overflow-wrap: anywhere; /* Evita que textos longos estourem o card */
+}
+
+/* LINKS DENTRO DAS ORIENTAÇÕES */
+.register-help a {
+    color: #0d6efd; /* Mantém os links no azul do ProjectUs */
+}
+
+
+/* =====================================================
+   10. RESPONSIVIDADE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    /* CONTÊINER EM CELULARES */
+
+    #container {
+        width: calc(100% - 20px); /* Deixa 10px de margem nas laterais */
+        margin: 10px auto; /* Reduz as margens externas */
+        border-radius: 6px; /* Reduz o arredondamento */
+    }
+
+    /* CABEÇALHO EM CELULARES */
+
+    .site-header {
+        padding: 16px; /* Reduz o espaço interno */
+        gap: 16px; /* Ajusta o espaço entre as linhas */
+    }
+
+    /* LOGO EM CELULARES */
+
+    .site-header .logo-img {
+        width: 220px; /* Define a largura da logo */
+        max-width: 100%; /* Respeita o espaço disponível */
+        height: auto; /* Preserva a proporção */
+    }
+
+    /* CONTA EM CELULARES */
+
+    .header-top {
+        align-items: flex-start; /* Alinha os elementos pelo início */
+    }
+
+    .header-account {
+        gap: 10px; /* Reduz a distância entre usuário e botão */
+    }
+
+    /* NAVEGAÇÃO EM CELULARES */
+
+    .site-header .site-nav {
+        gap: 8px; /* Reduz o espaço entre os links */
+    }
+
+    .site-header .site-nav > a:not(.btn-new-post),
+    .site-header .btn-new-post,
+    .site-header .btn-login {
+        padding: 8px 10px; /* Reduz o tamanho dos botões */
+    }
+
+    /* RODAPÉ EM CELULARES */
+
+    .site-footer {
+        padding: 18px 16px; /* Reduz o espaço interno */
+    }
 }

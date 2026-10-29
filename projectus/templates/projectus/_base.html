@@ -26,54 +26,57 @@
 
     <div id="container"> <!-- Agrupa a estrutura principal do site -->
 
-        <header class="site-header"> <!-- Cabeçalho principal -->
 
+        <header class="site-header"> <!-- Cabeçalho completo do ProjectUs -->
 
+            <!-- PRIMEIRA LINHA: LOGO E CONTA DO USUÁRIO -->
+            <div class="header-top">
 
-            <a class="site-logo" href="{% url 'home' %}"> <!-- Link para a página inicial -->
+                <a class="site-logo" href="{% url 'home' %}">
+                    <img class="logo-img" src="{% static 'projectus/logo_projectus.png' %}" alt="ProjectUs">
+                    <!-- Logo completa do site -->
+                </a>
 
-                <img src="{% static 'projectus/logo_projectus.png' %}" alt="Logo ProjectUs" class="logo-img">
-                <!-- Carrega o símbolo da logo -->
+                <div class="header-account">
+                    {% if user.is_authenticated %}
 
-                <span></span> <!-- Exibe o nome ao lado do símbolo -->
+                    <a href="{% url 'profile' %}" title="Acessar perfil">
+                        Olá, {{ user.username }}
+                    </a> <!-- Link para o perfil -->
 
-            </a>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Sair</button>
+                    </form> <!-- Botão de logout -->
 
+                    {% else %}
 
+                    <a class="btn-login" href="{% url 'login' %}">
+                        Entrar
+                    </a> <!-- Acesso à conta -->
 
-            <nav class="site-nav"> <!-- Barra de navegação principal -->
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- SEGUNDA LINHA: NAVEGAÇÃO À ESQUERDA -->
+            <nav class="site-nav">
 
                 <a href="{% url 'home' %}">Início</a>
-                <!-- Link para a página inicial -->
 
                 {% if user.is_authenticated %}
-                <!-- Verifica se existe um usuário autenticado -->
-
-                <a href="{% url 'profile' %}" title="Ver/editar perfil de {{ user.username }}">
-                    Olá, {{ user.username }}
+                <a href="{% url 'create_post' %}" class="btn-new-post">
+                    + Nova publicação
                 </a>
-                <!-- Exibe o nome do usuário e permite abrir o perfil -->
-
-                <form method="POST" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <!-- Protege o formulário contra requisições CSRF -->
-
-                    <button type="submit">Sair</button>
-                    <!-- Envia uma requisição POST para encerrar a sessão -->
-                </form>
-
-                {% else %}
-                <!-- Exibe esta opção se o usuário não estiver autenticado -->
-
-                <a href="{% url 'login' %}">Entrar</a>
-                <!-- Link para a página de login -->
-
                 {% endif %}
-                <!-- Finaliza a condição de autenticação -->
 
-            </nav> <!-- Finaliza a navegação -->
+                <!-- Futuros links de navegação serão adicionados aqui -->
 
-        </header> <!-- Finaliza o cabeçalho -->
+            </nav>
+
+        </header>
+
 
         <main>
             {% block content %}{% endblock %}

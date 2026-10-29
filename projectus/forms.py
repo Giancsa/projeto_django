@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -103,3 +103,48 @@ class ProfileForm(forms.ModelForm):
             )
 
         return email
+    
+    
+class PostForm(forms.ModelForm):
+    # Formulário para criar e editar publicações.
+
+    class Meta:
+        model = Post  # Usa o modelo Post já existente.
+
+        fields = [
+            'title',      # Título da publicação.
+            'summary',    # Resumo do artigo.
+            'thumbnail',  # URL da imagem de capa.
+            'textbody',   # Conteúdo completo do artigo.
+        ]
+
+        labels = {
+            'title': 'Título',
+            'summary': 'Resumo',
+            'thumbnail': 'URL da imagem de capa',
+            'textbody': 'Conteúdo da publicação',
+        }
+
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite o título da publicação',
+            }),
+
+            'summary': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Escreva um breve resumo',
+            }),
+
+            'thumbnail': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'https://exemplo.com/imagem.jpg',
+            }),
+
+            'textbody': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 12,
+                'placeholder': 'Escreva o conteúdo completo do artigo',
+            }),
+        }

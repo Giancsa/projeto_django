@@ -1,21 +1,83 @@
-{% extends 'projectus/_base.html' %}
+
+{% extends 'projectus/_base.html' %} <!-- Herda o layout principal -->
+
+{% block titulo %}Criar conta | ProjectUs{% endblock %}
+
 {% block content %}
 
-<h1>Criar conta</h1>
+<section class="login-page"> <!-- Reaproveita o alinhamento do login -->
 
-<article>
+    <div class="login-card"> <!-- Card principal do formulário -->
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Cadastrar</button>
-    </form>
+        <div class="login-header"> <!-- Cabeçalho azul -->
 
-    <p>
-        Já possui uma conta?
-        <a href="{% url 'login' %}">Entrar</a>
-    </p>
+            <h1>Crie sua conta</h1>
 
-</article>
+            <p>Faça parte da comunidade ProjectUs.</p>
+
+        </div>
+
+        <div class="login-body"> <!-- Área dos campos -->
+
+            <form method="POST"> <!-- Envia os dados para o Django -->
+
+                {% csrf_token %} <!-- Proteção contra requisições CSRF -->
+
+                {% if form.non_field_errors %}
+                    <div class="login-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                    <!-- Exibe erros gerais do formulário -->
+                {% endif %}
+
+                {% for field in form %} <!-- Percorre os campos do cadastro -->
+
+                    <div class="login-field"> <!-- Agrupa rótulo e campo -->
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+                        <!-- Exibe o nome do campo -->
+
+                        {{ field }}
+                        <!-- Renderiza o campo original do Django -->
+
+                        {% if field.help_text %}
+                            <div class="register-help">
+                                {{ field.help_text|safe }}
+                            </div>
+                            <!-- Exibe orientações do formulário -->
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                            <p class="login-field-error">{{ error }}</p>
+                        {% endfor %}
+                        <!-- Exibe erros específicos -->
+
+                    </div>
+
+                {% endfor %}
+
+                <button class="login-submit" type="submit">
+                    Criar minha conta
+                </button>
+                <!-- Envia o formulário de cadastro -->
+
+            </form>
+
+            <div class="login-links"> <!-- Link para quem já tem conta -->
+
+                <p>
+                    Já possui uma conta?
+                    <a href="{% url 'login' %}">Entrar</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

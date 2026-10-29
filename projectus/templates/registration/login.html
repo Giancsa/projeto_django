@@ -1,23 +1,82 @@
-{% extends 'projectus/_base.html' %}
 
-{% block titulo %}Login{% endblock %}
+{% extends 'projectus/_base.html' %} <!-- Herda o layout principal -->
+
+{% block titulo %}Login | ProjectUs{% endblock %} <!-- Define o título da aba -->
 
 {% block content %}
 
-<section>
+<section class="login-page"> <!-- Área exclusiva da página de login -->
 
-    <h1>Login</h1>
+    <div class="login-card"> <!-- Cartão que envolve o formulário -->
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <p><button type="submit">Entrar</button></p>
-    </form>
+        <div class="login-header"> <!-- Cabeçalho do cartão -->
 
-    <ul>
-        <li>Não possui uma conta? <a href="{% url 'register' %}">Cadastre-se</a></li>
-        <li>Esqueceu sua senha? <a href="{% url 'password_reset' %}">Definir nova senha</a></li>
-    </ul>
+            <h1>Bem-vindo de volta!</h1> <!-- Título principal -->
+
+            <p>Entre na sua conta para continuar no ProjectUs.</p>
+            <!-- Texto de apresentação -->
+
+        </div>
+
+        <div class="login-body"> <!-- Área dos campos -->
+
+            <form method="POST"> <!-- Envia os dados para o Django -->
+
+                {% csrf_token %} <!-- Protege contra requisições CSRF -->
+
+                {% if form.non_field_errors %}
+                    <div class="login-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                    <!-- Exibe erros gerais de autenticação -->
+                {% endif %}
+
+                {% for field in form %} <!-- Percorre os campos do login -->
+
+                    <div class="login-field"> <!-- Agrupa rótulo e campo -->
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+                        <!-- Mostra o nome do campo -->
+
+                        {{ field }}
+                        <!-- Renderiza o campo original do Django -->
+
+                        {% for error in field.errors %}
+                            <p class="login-field-error">{{ error }}</p>
+                        {% endfor %}
+                        <!-- Exibe erros específicos do campo -->
+
+                    </div>
+
+                {% endfor %}
+
+                <button class="login-submit" type="submit">
+                    Entrar na conta
+                </button>
+                <!-- Envia o formulário de autenticação -->
+
+            </form>
+
+            <div class="login-links"> <!-- Links auxiliares -->
+
+                <a href="{% url 'password_reset' %}">
+                    Esqueceu sua senha?
+                </a>
+                <!-- Abre a recuperação de senha -->
+
+                <p>
+                    Ainda não tem uma conta?
+                    <a href="{% url 'register' %}">Cadastre-se</a>
+                </p>
+                <!-- Direciona para o cadastro -->
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 

@@ -1,0 +1,87 @@
+
+{% extends 'projectus/_base.html' %} <!-- Herda o cabeçalho e o rodapé do site -->
+
+{% block content %}
+
+<div class="container py-5"> <!-- Centraliza o formulário e cria espaço vertical -->
+
+    <div class="row justify-content-center"> <!-- Centraliza a coluna horizontalmente -->
+
+        <div class="col-12 col-lg-9 col-xl-8"> <!-- Ajusta a largura conforme a tela -->
+
+            <div class="card shadow-sm"> <!-- Cria um card com sombra discreta -->
+
+                <div class="card-header bg-primary text-white p-4">
+                    <!-- Cabeçalho azul do formulário -->
+                    <h2 class="mb-1">Criar publicação</h2>
+                    <p class="mb-0">
+                        Compartilhe suas ideias com a comunidade.
+                    </p>
+                </div>
+
+                <div class="card-body p-4"> <!-- Área interna do formulário -->
+
+                    <form method="POST"> <!-- Envia os dados para a view atual -->
+
+                        {% csrf_token %} <!-- Protege contra requisições CSRF -->
+
+                        {% for field in form %} <!-- Percorre os campos do PostForm -->
+
+                            <div class="mb-4"> <!-- Separa visualmente cada campo -->
+
+                                <label
+                                    for="{{ field.id_for_label }}"
+                                    class="form-label"
+                                >
+                                    {{ field.label }}
+                                </label> <!-- Exibe o rótulo do campo -->
+
+                                {{ field }} <!-- Renderiza o campo criado pelo Django -->
+
+                                {% if field.help_text %}
+                                    <div class="form-text">
+                                        {{ field.help_text }}
+                                    </div> <!-- Exibe uma orientação, se existir -->
+                                {% endif %}
+
+                                {% for error in field.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ error }}
+                                    </div> <!-- Exibe erros específicos do campo -->
+                                {% endfor %}
+
+                            </div>
+
+                        {% endfor %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div> <!-- Exibe erros gerais do formulário -->
+                        {% endif %}
+
+                        <div class="d-flex flex-wrap gap-2 justify-content-end">
+                            <!-- Organiza os botões e permite quebra em telas pequenas -->
+
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                                Cancelar
+                            </a> <!-- Volta para a página inicial -->
+
+                            <button type="submit" class="btn btn-primary">
+                                Publicar post
+                            </button> <!-- Envia o formulário -->
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
